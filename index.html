@@ -16,14 +16,13 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             font-family: 'Arial', sans-serif;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
         h1 {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             color: #333;
             font-size: 2.5rem;
             font-weight: 900;
@@ -42,6 +41,7 @@
             display: flex;
             gap: 10px;
             align-items: center;
+            margin-bottom: 60px;
         }
 
         .flip-clock .separator {
@@ -162,15 +162,95 @@
             }
         }
 
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 800px;
+            width: 100%;
+            margin-bottom: 50px;
+        }
+
+        .feature {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 25px 20px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 64px;
+            height: 64px;
+            margin-bottom: 15px;
+            background: #333;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-icon svg {
+            width: 36px;
+            height: 36px;
+            fill: #fff;
+        }
+
+        .feature h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .feature p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* App Store Badge */
+        .app-store-badge {
+            margin-top: 10px;
+        }
+
+        .app-store-badge a {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        .app-store-badge a:hover {
+            transform: scale(1.05);
+        }
+
+        .app-store-badge img {
+            height: 50px;
+            width: auto;
+        }
+
         /* Responsive styles */
         @media (max-width: 600px) {
+            body {
+                padding: 30px 15px;
+            }
+
             h1 {
                 font-size: 1.5rem;
-                margin-bottom: 30px;
+                margin-bottom: 25px;
             }
 
             .flip-clock {
                 gap: 6px;
+                margin-bottom: 40px;
             }
 
             .flip-clock .separator {
@@ -207,16 +287,44 @@
                 margin-left: 10px;
                 min-width: 40px;
             }
+
+            .features {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .feature {
+                padding: 20px 15px;
+            }
+
+            .feature-icon {
+                width: 56px;
+                height: 56px;
+            }
+
+            .feature-icon svg {
+                width: 30px;
+                height: 30px;
+            }
+
+            .feature h3 {
+                font-size: 1rem;
+            }
+
+            .feature p {
+                font-size: 0.85rem;
+            }
         }
 
         @media (max-width: 380px) {
             h1 {
                 font-size: 1.25rem;
-                margin-bottom: 25px;
+                margin-bottom: 20px;
             }
 
             .flip-clock {
                 gap: 4px;
+                margin-bottom: 35px;
             }
 
             .flip-clock .separator {
@@ -322,6 +430,58 @@
         </div>
 
         <span class="period" id="period"></span>
+    </div>
+
+    <div class="features">
+        <div class="feature">
+            <div class="feature-icon">
+                <!-- Unlimited Alarms Icon (placeholder) -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                </svg>
+            </div>
+            <h3>Unlimited Alarms</h3>
+            <p>Create as many alarms as you need for any specific calendar day</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">
+                <!-- Repeatable Weekdays Icon (placeholder) -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
+                </svg>
+            </div>
+            <h3>Repeatable Alarms</h3>
+            <p>Set recurring alarms for specific weekdays that repeat automatically</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">
+                <!-- Custom Sounds Icon (placeholder) -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                </svg>
+            </div>
+            <h3>Custom Sounds</h3>
+            <p>Choose from a variety of alarm sounds or set your own special tones</p>
+        </div>
+
+        <div class="feature">
+            <div class="feature-icon">
+                <!-- Math Puzzle Icon (placeholder) -->
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2v-4H8v-2h4V7h2v4h4v2h-4v4z"/>
+                </svg>
+            </div>
+            <h3>Math Puzzles</h3>
+            <p>Solve math problems to dismiss alarms with 3 difficulty levels to wake you up</p>
+        </div>
+    </div>
+
+    <div class="app-store-badge">
+        <a href="#" target="_blank" rel="noopener noreferrer">
+            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+        </a>
     </div>
 
     <script>
