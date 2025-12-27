@@ -351,10 +351,12 @@
             }
 
             detectTimeFormat() {
+                // Use toLocaleTimeString which respects system settings
                 const testDate = new Date(2000, 0, 1, 13, 0, 0);
                 const formatted = testDate.toLocaleTimeString();
-                // If the formatted time contains AM/PM indicators or the hour is not 13
-                return /AM|PM/i.test(formatted) || !/13/.test(formatted);
+
+                // 24-hour format will contain "13", 12-hour format will show "1" with AM/PM
+                return !formatted.includes('13');
             }
 
             update() {
