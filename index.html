@@ -29,19 +29,30 @@
             text-align: center;
         }
 
-        .period {
-            font-size: 32px;
-            font-weight: bold;
-            color: #333;
-            margin-left: 15px;
-            min-width: 60px;
+        .clock-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 150px;
+            width: 100%;
         }
 
         .flip-clock {
+            position: relative;
             display: flex;
             gap: 10px;
             align-items: center;
-            margin-bottom: 150px;
+        }
+
+        .period {
+            position: absolute;
+            left: 100%;
+            margin-left: 15px;
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            white-space: nowrap;
         }
 
         .flip-clock .separator {
@@ -248,9 +259,16 @@
                 margin-bottom: 25px;
             }
 
+            .clock-wrapper {
+                margin-bottom: 120px;
+            }
+
             .flip-clock {
                 gap: 6px;
-                margin-bottom: 120px;
+            }
+
+            .period {
+                font-size: 20px;
             }
 
             .flip-clock .separator {
@@ -280,12 +298,6 @@
             .flip-card.bottom .flip-card-inner,
             .flip-card.flip-bottom .flip-card-inner {
                 border-radius: 0 0 6px 6px;
-            }
-
-            .period {
-                font-size: 20px;
-                margin-left: 10px;
-                min-width: 40px;
             }
 
             .features {
@@ -322,9 +334,16 @@
                 margin-bottom: 20px;
             }
 
+            .clock-wrapper {
+                margin-bottom: 120px;
+            }
+
             .flip-clock {
                 gap: 4px;
-                margin-bottom: 120px;
+            }
+
+            .period {
+                font-size: 16px;
             }
 
             .flip-clock .separator {
@@ -355,20 +374,15 @@
             .flip-card.flip-bottom .flip-card-inner {
                 border-radius: 0 0 4px 4px;
             }
-
-            .period {
-                font-size: 16px;
-                margin-left: 8px;
-                min-width: 32px;
-            }
         }
     </style>
 </head>
 <body>
     <h1>(Multi) AlarmPro</h1>
 
-    <div class="flip-clock">
-        <div class="flip-unit-container" id="hours">
+    <div class="clock-wrapper">
+        <div class="flip-clock">
+            <div class="flip-unit-container" id="hours">
             <div class="flip-unit" id="hour-tens">
                 <div class="flip-card top">
                     <div class="flip-card-inner">0</div>
@@ -430,6 +444,7 @@
         </div>
 
         <span class="period" id="period"></span>
+        </div>
     </div>
 
     <div class="features">
