@@ -29,6 +29,14 @@
             text-align: center;
         }
 
+        .period {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            margin-left: 15px;
+            min-width: 60px;
+        }
+
         .flip-clock {
             display: flex;
             gap: 10px;
@@ -192,6 +200,12 @@
             .flip-card.flip-bottom .flip-card-inner {
                 border-radius: 0 0 6px 6px;
             }
+
+            .period {
+                font-size: 20px;
+                margin-left: 10px;
+                min-width: 40px;
+            }
         }
 
         @media (max-width: 380px) {
@@ -231,6 +245,12 @@
             .flip-card.bottom .flip-card-inner,
             .flip-card.flip-bottom .flip-card-inner {
                 border-radius: 0 0 4px 4px;
+            }
+
+            .period {
+                font-size: 16px;
+                margin-left: 8px;
+                min-width: 32px;
             }
         }
     </style>
@@ -299,6 +319,8 @@
                 </div>
             </div>
         </div>
+
+        <span class="period" id="period"></span>
     </div>
 
     <script>
@@ -310,6 +332,7 @@
                 this.minuteOnes = document.getElementById('minute-ones');
                 this.secondTens = document.getElementById('second-tens');
                 this.secondOnes = document.getElementById('second-ones');
+                this.periodElement = document.getElementById('period');
 
                 this.prevTime = {
                     hourTens: -1,
@@ -320,13 +343,33 @@
                     secondOnes: -1
                 };
 
+                // Detect if locale uses 12-hour format
+                this.use12Hour = this.detectTimeFormat();
+
                 this.update();
                 setInterval(() => this.update(), 1000);
             }
 
+            detectTimeFormat() {
+                const testDate = new Date(2000, 0, 1, 13, 0, 0);
+                const formatted = testDate.toLocaleTimeString();
+                // If the formatted time contains AM/PM indicators or the hour is not 13
+                return /AM|PM/i.test(formatted) || !/13/.test(formatted);
+            }
+
             update() {
                 const now = new Date();
-                const hours = String(now.getHours()).padStart(2, '0');
+                let hour = now.getHours();
+                let period = '';
+
+                if (this.use12Hour) {
+                    period = hour >= 12 ? 'PM' : 'AM';
+                    hour = hour % 12;
+                    if (hour === 0) hour = 12;
+                    this.periodElement.textContent = period;
+                }
+
+                const hours = String(hour).padStart(2, '0');
                 const minutes = String(now.getMinutes()).padStart(2, '0');
                 const seconds = String(now.getSeconds()).padStart(2, '0');
 
