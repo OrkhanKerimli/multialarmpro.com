@@ -19,12 +19,14 @@
             justify-content: center;
             align-items: center;
             font-family: 'Arial', sans-serif;
+            padding: 20px;
         }
 
         h1 {
             margin-bottom: 40px;
             color: #333;
             font-size: 2.5rem;
+            text-align: center;
         }
 
         .flip-clock {
@@ -57,6 +59,7 @@
             width: 100%;
             height: 50%;
             overflow: hidden;
+            backface-visibility: hidden;
         }
 
         .flip-card-inner {
@@ -76,7 +79,7 @@
 
         .flip-card.top {
             top: 0;
-            border-radius: 8px 8px 0 0;
+            z-index: 1;
         }
 
         .flip-card.top .flip-card-inner {
@@ -86,7 +89,7 @@
 
         .flip-card.bottom {
             bottom: 0;
-            border-radius: 0 0 8px 8px;
+            z-index: 1;
         }
 
         .flip-card.bottom .flip-card-inner {
@@ -105,26 +108,31 @@
             z-index: 10;
         }
 
+        /* Flipping top card - shows old value, flips down */
         .flip-card.flip-top {
             top: 0;
-            z-index: 5;
+            z-index: 3;
             transform-origin: bottom;
             animation: flipTop 0.3s ease-in forwards;
         }
 
         .flip-card.flip-top .flip-card-inner {
             top: 0;
+            border-radius: 8px 8px 0 0;
         }
 
+        /* Flipping bottom card - shows new value, flips in from top */
         .flip-card.flip-bottom {
             bottom: 0;
-            z-index: 4;
+            z-index: 2;
             transform-origin: top;
+            transform: rotateX(90deg);
             animation: flipBottom 0.3s ease-out 0.3s forwards;
         }
 
         .flip-card.flip-bottom .flip-card-inner {
             bottom: 0;
+            border-radius: 0 0 8px 8px;
         }
 
         @keyframes flipTop {
@@ -142,6 +150,87 @@
             }
             100% {
                 transform: rotateX(0deg);
+            }
+        }
+
+        /* Responsive styles */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+                margin-bottom: 30px;
+            }
+
+            .flip-clock {
+                gap: 6px;
+            }
+
+            .flip-clock .separator {
+                font-size: 36px;
+                padding: 0 2px;
+            }
+
+            .flip-unit-container {
+                gap: 3px;
+            }
+
+            .flip-unit {
+                width: 45px;
+                height: 68px;
+            }
+
+            .flip-card-inner {
+                font-size: 40px;
+                border-radius: 6px;
+            }
+
+            .flip-card.top .flip-card-inner,
+            .flip-card.flip-top .flip-card-inner {
+                border-radius: 6px 6px 0 0;
+            }
+
+            .flip-card.bottom .flip-card-inner,
+            .flip-card.flip-bottom .flip-card-inner {
+                border-radius: 0 0 6px 6px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 1.25rem;
+                margin-bottom: 25px;
+            }
+
+            .flip-clock {
+                gap: 4px;
+            }
+
+            .flip-clock .separator {
+                font-size: 28px;
+                padding: 0 1px;
+            }
+
+            .flip-unit-container {
+                gap: 2px;
+            }
+
+            .flip-unit {
+                width: 38px;
+                height: 57px;
+            }
+
+            .flip-card-inner {
+                font-size: 32px;
+                border-radius: 4px;
+            }
+
+            .flip-card.top .flip-card-inner,
+            .flip-card.flip-top .flip-card-inner {
+                border-radius: 4px 4px 0 0;
+            }
+
+            .flip-card.bottom .flip-card-inner,
+            .flip-card.flip-bottom .flip-card-inner {
+                border-radius: 0 0 4px 4px;
             }
         }
     </style>
@@ -274,16 +363,20 @@
                     element.appendChild(flipTop);
                     element.appendChild(flipBottom);
 
-                    // Clean up after animation
+                    // Update top card immediately (it's hidden behind the flipping card)
+                    topCard.textContent = value;
+
+                    // Update bottom card after the flip animation completes
                     setTimeout(() => {
+                        bottomCard.textContent = value;
                         flipTop.remove();
                         flipBottom.remove();
                     }, 600);
+                } else {
+                    // Initial load - update both cards immediately
+                    topCard.textContent = value;
+                    bottomCard.textContent = value;
                 }
-
-                // Update the static cards
-                topCard.textContent = value;
-                bottomCard.textContent = value;
 
                 this.prevTime[key] = value;
             }
