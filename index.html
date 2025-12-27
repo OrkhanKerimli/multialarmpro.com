@@ -4,8 +4,293 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>(Multi) AlarmPro</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 40px;
+            color: #333;
+            font-size: 2.5rem;
+        }
+
+        .flip-clock {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .flip-clock .separator {
+            font-size: 60px;
+            font-weight: bold;
+            color: #333;
+            padding: 0 5px;
+        }
+
+        .flip-unit-container {
+            display: flex;
+            gap: 4px;
+        }
+
+        .flip-unit {
+            position: relative;
+            width: 80px;
+            height: 120px;
+            perspective: 300px;
+        }
+
+        .flip-card {
+            position: absolute;
+            width: 100%;
+            height: 50%;
+            overflow: hidden;
+        }
+
+        .flip-card-inner {
+            position: absolute;
+            width: 100%;
+            height: 200%;
+            background: linear-gradient(180deg, #333 0%, #1a1a1a 100%);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 70px;
+            font-weight: bold;
+            color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .flip-card.top {
+            top: 0;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .flip-card.top .flip-card-inner {
+            top: 0;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .flip-card.bottom {
+            bottom: 0;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .flip-card.bottom .flip-card-inner {
+            bottom: 0;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .flip-unit::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 10;
+        }
+
+        .flip-card.flip-top {
+            top: 0;
+            z-index: 5;
+            transform-origin: bottom;
+            animation: flipTop 0.3s ease-in forwards;
+        }
+
+        .flip-card.flip-top .flip-card-inner {
+            top: 0;
+        }
+
+        .flip-card.flip-bottom {
+            bottom: 0;
+            z-index: 4;
+            transform-origin: top;
+            animation: flipBottom 0.3s ease-out 0.3s forwards;
+        }
+
+        .flip-card.flip-bottom .flip-card-inner {
+            bottom: 0;
+        }
+
+        @keyframes flipTop {
+            0% {
+                transform: rotateX(0deg);
+            }
+            100% {
+                transform: rotateX(-90deg);
+            }
+        }
+
+        @keyframes flipBottom {
+            0% {
+                transform: rotateX(90deg);
+            }
+            100% {
+                transform: rotateX(0deg);
+            }
+        }
+    </style>
 </head>
 <body>
     <h1>(Multi) AlarmPro</h1>
+
+    <div class="flip-clock">
+        <div class="flip-unit-container" id="hours">
+            <div class="flip-unit" id="hour-tens">
+                <div class="flip-card top">
+                    <div class="flip-card-inner">0</div>
+                </div>
+                <div class="flip-card bottom">
+                    <div class="flip-card-inner">0</div>
+                </div>
+            </div>
+            <div class="flip-unit" id="hour-ones">
+                <div class="flip-card top">
+                    <div class="flip-card-inner">0</div>
+                </div>
+                <div class="flip-card bottom">
+                    <div class="flip-card-inner">0</div>
+                </div>
+            </div>
+        </div>
+
+        <span class="separator">:</span>
+
+        <div class="flip-unit-container" id="minutes">
+            <div class="flip-unit" id="minute-tens">
+                <div class="flip-card top">
+                    <div class="flip-card-inner">0</div>
+                </div>
+                <div class="flip-card bottom">
+                    <div class="flip-card-inner">0</div>
+                </div>
+            </div>
+            <div class="flip-unit" id="minute-ones">
+                <div class="flip-card top">
+                    <div class="flip-card-inner">0</div>
+                </div>
+                <div class="flip-card bottom">
+                    <div class="flip-card-inner">0</div>
+                </div>
+            </div>
+        </div>
+
+        <span class="separator">:</span>
+
+        <div class="flip-unit-container" id="seconds">
+            <div class="flip-unit" id="second-tens">
+                <div class="flip-card top">
+                    <div class="flip-card-inner">0</div>
+                </div>
+                <div class="flip-card bottom">
+                    <div class="flip-card-inner">0</div>
+                </div>
+            </div>
+            <div class="flip-unit" id="second-ones">
+                <div class="flip-card top">
+                    <div class="flip-card-inner">0</div>
+                </div>
+                <div class="flip-card bottom">
+                    <div class="flip-card-inner">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class FlipClock {
+            constructor() {
+                this.hourTens = document.getElementById('hour-tens');
+                this.hourOnes = document.getElementById('hour-ones');
+                this.minuteTens = document.getElementById('minute-tens');
+                this.minuteOnes = document.getElementById('minute-ones');
+                this.secondTens = document.getElementById('second-tens');
+                this.secondOnes = document.getElementById('second-ones');
+
+                this.prevTime = {
+                    hourTens: -1,
+                    hourOnes: -1,
+                    minuteTens: -1,
+                    minuteOnes: -1,
+                    secondTens: -1,
+                    secondOnes: -1
+                };
+
+                this.update();
+                setInterval(() => this.update(), 1000);
+            }
+
+            update() {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const seconds = String(now.getSeconds()).padStart(2, '0');
+
+                this.flipTo(this.hourTens, hours[0], 'hourTens');
+                this.flipTo(this.hourOnes, hours[1], 'hourOnes');
+                this.flipTo(this.minuteTens, minutes[0], 'minuteTens');
+                this.flipTo(this.minuteOnes, minutes[1], 'minuteOnes');
+                this.flipTo(this.secondTens, seconds[0], 'secondTens');
+                this.flipTo(this.secondOnes, seconds[1], 'secondOnes');
+            }
+
+            flipTo(element, value, key) {
+                if (this.prevTime[key] === value) return;
+
+                const topCard = element.querySelector('.flip-card.top .flip-card-inner');
+                const bottomCard = element.querySelector('.flip-card.bottom .flip-card-inner');
+
+                // Remove any existing flip animations
+                const oldFlipTop = element.querySelector('.flip-top');
+                const oldFlipBottom = element.querySelector('.flip-bottom');
+                if (oldFlipTop) oldFlipTop.remove();
+                if (oldFlipBottom) oldFlipBottom.remove();
+
+                if (this.prevTime[key] !== -1) {
+                    // Create flip animation cards
+                    const flipTop = document.createElement('div');
+                    flipTop.className = 'flip-card flip-top';
+                    flipTop.innerHTML = `<div class="flip-card-inner">${this.prevTime[key]}</div>`;
+
+                    const flipBottom = document.createElement('div');
+                    flipBottom.className = 'flip-card flip-bottom';
+                    flipBottom.innerHTML = `<div class="flip-card-inner">${value}</div>`;
+
+                    element.appendChild(flipTop);
+                    element.appendChild(flipBottom);
+
+                    // Clean up after animation
+                    setTimeout(() => {
+                        flipTop.remove();
+                        flipBottom.remove();
+                    }, 600);
+                }
+
+                // Update the static cards
+                topCard.textContent = value;
+                bottomCard.textContent = value;
+
+                this.prevTime[key] = value;
+            }
+        }
+
+        // Initialize the clock
+        new FlipClock();
+    </script>
 </body>
 </html>
