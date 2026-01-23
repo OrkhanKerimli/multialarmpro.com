@@ -3,7 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MultiAlarm Pro</title>
+    <title>MultiAlarm Pro - Never Oversleep Again</title>
+    <meta name="description" content="The ultimate alarm app for heavy sleepers. Math puzzles, unlimited alarms, and smart features to ensure you wake up on time.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,60 +15,463 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #FFD60A;
+            --primary-dark: #E6C200;
+            --dark: #0A0A0A;
+            --dark-surface: #141414;
+            --dark-elevated: #1C1C1E;
+            --gray-100: #F5F5F7;
+            --gray-200: #E5E5EA;
+            --gray-400: #AEAEB2;
+            --gray-600: #636366;
+            --white: #FFFFFF;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            background: #FCF1E9;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--dark);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--white);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--dark);
+        }
+
+        .nav-cta {
+            background: var(--white);
+            color: var(--dark);
+            padding: 10px 20px;
+            border-radius: 100px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary);
+            transform: scale(1.05);
+        }
+
+        /* Hero Section */
+        .hero {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
-            font-family: 'Arial', sans-serif;
-            padding: 40px 20px;
+            text-align: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            overflow: hidden;
         }
 
-        h1 {
-            margin-bottom: 30px;
-            color: #333;
-            font-size: 2.5rem;
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150%;
+            height: 100%;
+            background: radial-gradient(ellipse at center top, rgba(255, 214, 10, 0.15) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 214, 10, 0.1);
+            border: 1px solid rgba(255, 214, 10, 0.3);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--primary);
+            margin-bottom: 32px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .hero-badge svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--primary);
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 6rem);
             font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.03em;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s ease 0.1s both;
+        }
+
+        .hero h1 span {
+            display: block;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gray-400) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--primary) 0%, #FF9500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+            color: var(--gray-400);
+            max-width: 600px;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            animation: fadeInUp 0.8s ease 0.3s both;
+        }
+
+        .app-store-btn {
+            transition: transform 0.3s ease;
+        }
+
+        .app-store-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .app-store-btn img {
+            height: 54px;
+        }
+
+        .hero-note {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        /* Phone Mockup Section */
+        .phone-showcase {
+            padding: 40px 20px 120px;
+            position: relative;
+        }
+
+        .phone-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .phone-mockup {
+            position: relative;
+            background: var(--dark-elevated);
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.5),
+                        0 30px 60px -30px rgba(0, 0, 0, 0.5),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform: perspective(1000px) rotateY(0deg);
+            transition: transform 0.5s ease;
+        }
+
+        .phone-mockup.left {
+            transform: perspective(1000px) rotateY(15deg) scale(0.85);
+            opacity: 0.7;
+        }
+
+        .phone-mockup.right {
+            transform: perspective(1000px) rotateY(-15deg) scale(0.85);
+            opacity: 0.7;
+        }
+
+        .phone-mockup.center {
+            z-index: 2;
+        }
+
+        .phone-screen {
+            width: 280px;
+            height: 600px;
+            background: var(--white);
+            border-radius: 32px;
+            overflow: hidden;
+        }
+
+        .phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 120px 20px;
+            background: var(--dark-surface);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+
+        .section-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--gray-400);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--dark-elevated);
+            border-radius: 24px;
+            padding: 40px 32px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 214, 10, 0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 214, 10, 0.2);
+            box-shadow: 0 20px 40px -20px rgba(255, 214, 10, 0.15);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary) 0%, #FF9500 100%);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+
+        .feature-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--dark);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--gray-400);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+        }
+
+        /* How It Works Section */
+        .how-it-works {
+            padding: 120px 20px;
+            background: var(--dark);
+        }
+
+        .steps-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .step:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-number {
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary) 0%, rgba(255, 214, 10, 0.2) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 16px;
+        }
+
+        .step-content h3 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .step-content p {
+            color: var(--gray-400);
+            font-size: 1.0625rem;
+            line-height: 1.8;
+        }
+
+        .step-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .step-phone {
+            width: 240px;
+            height: 500px;
+            background: var(--dark-elevated);
+            border-radius: 36px;
+            padding: 10px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .step-phone-screen {
+            width: 100%;
+            height: 100%;
+            background: var(--white);
+            border-radius: 28px;
+            overflow: hidden;
+        }
+
+        .step-phone-screen img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+        }
+
+        /* Clock Section */
+        .clock-section {
+            padding: 120px 20px;
+            background: linear-gradient(180deg, var(--dark-surface) 0%, var(--dark) 100%);
             text-align: center;
         }
 
         .clock-wrapper {
-            position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 150px;
-            width: 100%;
+            margin: 60px 0;
         }
 
         .flip-clock {
-            position: relative;
             display: flex;
             gap: 10px;
             align-items: center;
         }
 
-        .period {
-            position: absolute;
-            left: 100%;
-            margin-left: 15px;
-            font-size: 32px;
-            font-weight: bold;
-            color: #333;
-            white-space: nowrap;
-        }
-
         .flip-clock .separator {
             font-size: 60px;
             font-weight: bold;
-            color: #333;
+            color: var(--white);
             padding: 0 5px;
+            opacity: 0.5;
         }
 
         .flip-unit-container {
             display: flex;
-            gap: 4px;
+            gap: 6px;
         }
 
         .flip-unit {
@@ -86,15 +493,16 @@
             position: absolute;
             width: 100%;
             height: 200%;
-            background: linear-gradient(180deg, #333 0%, #1a1a1a 100%);
-            border-radius: 8px;
+            background: linear-gradient(180deg, var(--dark-elevated) 0%, #0d0d0d 100%);
+            border-radius: 12px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 70px;
-            font-weight: bold;
-            color: #fff;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            font-size: 64px;
+            font-weight: 800;
+            color: var(--white);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.1);
         }
 
         .flip-card.top {
@@ -104,7 +512,7 @@
 
         .flip-card.top .flip-card-inner {
             top: 0;
-            border-radius: 8px 8px 0 0;
+            border-radius: 12px 12px 0 0;
         }
 
         .flip-card.bottom {
@@ -114,7 +522,7 @@
 
         .flip-card.bottom .flip-card-inner {
             bottom: 0;
-            border-radius: 0 0 8px 8px;
+            border-radius: 0 0 12px 12px;
         }
 
         .flip-unit::after {
@@ -124,11 +532,10 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background: rgba(0, 0, 0, 0.4);
+            background: rgba(0, 0, 0, 0.6);
             z-index: 10;
         }
 
-        /* Flipping top card - shows old value, flips down */
         .flip-card.flip-top {
             top: 0;
             z-index: 3;
@@ -138,10 +545,9 @@
 
         .flip-card.flip-top .flip-card-inner {
             top: 0;
-            border-radius: 8px 8px 0 0;
+            border-radius: 12px 12px 0 0;
         }
 
-        /* Flipping bottom card - shows new value, flips in from top */
         .flip-card.flip-bottom {
             bottom: 0;
             z-index: 2;
@@ -152,150 +558,265 @@
 
         .flip-card.flip-bottom .flip-card-inner {
             bottom: 0;
-            border-radius: 0 0 8px 8px;
+            border-radius: 0 0 12px 12px;
+        }
+
+        .period {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-left: 16px;
         }
 
         @keyframes flipTop {
-            0% {
-                transform: rotateX(0deg);
-            }
-            100% {
-                transform: rotateX(-90deg);
-            }
+            0% { transform: rotateX(0deg); }
+            100% { transform: rotateX(-90deg); }
         }
 
         @keyframes flipBottom {
-            0% {
-                transform: rotateX(90deg);
-            }
-            100% {
-                transform: rotateX(0deg);
-            }
+            0% { transform: rotateX(90deg); }
+            100% { transform: rotateX(0deg); }
         }
 
-        /* Features Section */
-        .features {
+        /* Testimonials / Perfect For Section */
+        .perfect-for {
+            padding: 120px 20px;
+            background: var(--dark-surface);
+        }
+
+        .perfect-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            max-width: 800px;
-            width: 100%;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        .feature {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .perfect-card {
+            background: linear-gradient(135deg, var(--dark-elevated) 0%, rgba(28, 28, 30, 0.5) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 32px;
             text-align: center;
-            padding: 25px 20px;
-            background: rgba(255, 255, 255, 0.6);
-            border-radius: 16px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.3s ease;
         }
 
-        .feature:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        .perfect-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 214, 10, 0.2);
         }
 
-        .feature-icon {
-            width: 64px;
-            height: 64px;
-            margin-bottom: 15px;
-            background: #333;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .perfect-card-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
         }
 
-        .feature-icon svg {
-            width: 36px;
-            height: 36px;
-            fill: #fff;
-        }
-
-        .feature h3 {
-            font-size: 1.1rem;
+        .perfect-card h3 {
+            font-size: 1.125rem;
             font-weight: 700;
-            color: #333;
             margin-bottom: 8px;
         }
 
-        .feature p {
-            font-size: 0.9rem;
-            color: #666;
-            line-height: 1.5;
+        .perfect-card p {
+            font-size: 0.875rem;
+            color: var(--gray-400);
         }
 
-        /* App Store Badge */
-        .app-store-badge {
-            margin-top: 10px;
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 20px;
+            background: var(--dark);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .app-store-badge a {
-            display: inline-block;
-            transition: transform 0.2s ease;
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200%;
+            height: 100%;
+            background: radial-gradient(ellipse at center bottom, rgba(255, 214, 10, 0.1) 0%, transparent 60%);
+            pointer-events: none;
         }
 
-        .app-store-badge a:hover {
-            transform: scale(1.05);
+        .cta-content {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .app-store-badge img {
-            height: 50px;
-            width: auto;
+        .cta-section h2 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 20px;
         }
 
-        /* Footer Links */
-        .footer-links {
-            margin-top: 30px;
+        .cta-section p {
+            font-size: 1.125rem;
+            color: var(--gray-400);
+            margin-bottom: 40px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 20px;
+            background: var(--dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            gap: 15px;
+            justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-logo {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--gray-400);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 32px;
         }
 
         .footer-links a {
-            color: #666;
+            color: var(--gray-400);
             text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.2s ease;
+            font-size: 0.875rem;
+            transition: color 0.3s ease;
         }
 
         .footer-links a:hover {
-            color: #333;
+            color: var(--white);
         }
 
-        .footer-links .divider {
-            color: #ccc;
+        .footer-copyright {
+            width: 100%;
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.875rem;
+            color: var(--gray-600);
         }
 
-        /* Responsive styles */
-        @media (max-width: 600px) {
-            body {
-                padding: 30px 15px;
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .phone-mockup.left,
+            .phone-mockup.right {
+                display: none;
             }
 
-            h1 {
-                font-size: 1.5rem;
-                margin-bottom: 25px;
+            .step {
+                flex-direction: column !important;
+                text-align: center;
             }
 
-            .clock-wrapper {
-                margin-bottom: 120px;
+            .step-number {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 16px 20px;
             }
 
-            .flip-clock {
-                gap: 6px;
+            .nav-cta {
+                padding: 8px 16px;
+                font-size: 0.8125rem;
+            }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .phone-screen {
+                width: 240px;
+                height: 520px;
+            }
+
+            .flip-unit {
+                width: 50px;
+                height: 75px;
+            }
+
+            .flip-card-inner {
+                font-size: 40px;
+                border-radius: 8px;
+            }
+
+            .flip-clock .separator {
+                font-size: 36px;
             }
 
             .period {
                 font-size: 20px;
             }
 
+            .step-phone {
+                width: 200px;
+                height: 420px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .flip-unit {
+                width: 40px;
+                height: 60px;
+            }
+
+            .flip-card-inner {
+                font-size: 32px;
+                border-radius: 6px;
+            }
+
             .flip-clock .separator {
-                font-size: 36px;
+                font-size: 28px;
                 padding: 0 2px;
             }
 
@@ -303,248 +824,334 @@
                 gap: 3px;
             }
 
-            .flip-unit {
-                width: 45px;
-                height: 68px;
-            }
-
-            .flip-card-inner {
-                font-size: 40px;
-                border-radius: 6px;
-            }
-
-            .flip-card.top .flip-card-inner,
-            .flip-card.flip-top .flip-card-inner {
-                border-radius: 6px 6px 0 0;
-            }
-
-            .flip-card.bottom .flip-card-inner,
-            .flip-card.flip-bottom .flip-card-inner {
-                border-radius: 0 0 6px 6px;
-            }
-
-            .features {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .feature {
-                padding: 20px 15px;
-            }
-
-            .feature-icon {
-                width: 56px;
-                height: 56px;
-            }
-
-            .feature-icon svg {
-                width: 30px;
-                height: 30px;
-            }
-
-            .feature h3 {
-                font-size: 1rem;
-            }
-
-            .feature p {
-                font-size: 0.85rem;
-            }
-        }
-
-        @media (max-width: 380px) {
-            h1 {
-                font-size: 1.25rem;
-                margin-bottom: 20px;
-            }
-
-            .clock-wrapper {
-                margin-bottom: 120px;
-            }
-
             .flip-clock {
-                gap: 4px;
+                gap: 6px;
             }
 
             .period {
                 font-size: 16px;
-            }
-
-            .flip-clock .separator {
-                font-size: 28px;
-                padding: 0 1px;
-            }
-
-            .flip-unit-container {
-                gap: 2px;
-            }
-
-            .flip-unit {
-                width: 38px;
-                height: 57px;
-            }
-
-            .flip-card-inner {
-                font-size: 32px;
-                border-radius: 4px;
-            }
-
-            .flip-card.top .flip-card-inner,
-            .flip-card.flip-top .flip-card-inner {
-                border-radius: 4px 4px 0 0;
-            }
-
-            .flip-card.bottom .flip-card-inner,
-            .flip-card.flip-bottom .flip-card-inner {
-                border-radius: 0 0 4px 4px;
+                margin-left: 10px;
             }
         }
     </style>
 </head>
 <body>
-    <h1>MultiAlarm Pro</h1>
-
-    <div class="clock-wrapper">
-        <div class="flip-clock">
-            <div class="flip-unit-container" id="hours">
-            <div class="flip-unit" id="hour-tens">
-                <div class="flip-card top">
-                    <div class="flip-card-inner">0</div>
-                </div>
-                <div class="flip-card bottom">
-                    <div class="flip-card-inner">0</div>
-                </div>
-            </div>
-            <div class="flip-unit" id="hour-ones">
-                <div class="flip-card top">
-                    <div class="flip-card-inner">0</div>
-                </div>
-                <div class="flip-card bottom">
-                    <div class="flip-card-inner">0</div>
-                </div>
-            </div>
-        </div>
-
-        <span class="separator">:</span>
-
-        <div class="flip-unit-container" id="minutes">
-            <div class="flip-unit" id="minute-tens">
-                <div class="flip-card top">
-                    <div class="flip-card-inner">0</div>
-                </div>
-                <div class="flip-card bottom">
-                    <div class="flip-card-inner">0</div>
-                </div>
-            </div>
-            <div class="flip-unit" id="minute-ones">
-                <div class="flip-card top">
-                    <div class="flip-card-inner">0</div>
-                </div>
-                <div class="flip-card bottom">
-                    <div class="flip-card-inner">0</div>
-                </div>
-            </div>
-        </div>
-
-        <span class="separator">:</span>
-
-        <div class="flip-unit-container" id="seconds">
-            <div class="flip-unit" id="second-tens">
-                <div class="flip-card top">
-                    <div class="flip-card-inner">0</div>
-                </div>
-                <div class="flip-card bottom">
-                    <div class="flip-card-inner">0</div>
-                </div>
-            </div>
-            <div class="flip-unit" id="second-ones">
-                <div class="flip-card top">
-                    <div class="flip-card-inner">0</div>
-                </div>
-                <div class="flip-card bottom">
-                    <div class="flip-card-inner">0</div>
-                </div>
-            </div>
-        </div>
-
-        <span class="period" id="period"></span>
-        </div>
-    </div>
-
-    <div class="features">
-        <div class="feature">
-            <div class="feature-icon">
-                <svg viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M9.999,40c-.15,0-.303-.034-.446-.105-.494-.247-.694-.848-.447-1.342l2-4c.248-.494.849-.694,1.342-.447s.694.848.447,1.342l-2,4c-.176.351-.528.553-.896.553Z"/>
-                    <path d="M32.001,40c-.367,0-.72-.202-.896-.553l-2-4c-.247-.494-.047-1.095.447-1.342.494-.247,1.094-.047,1.342.447l2,4c.247.494.047,1.095-.447,1.342-.144.072-.296.105-.446.105Z"/>
-                    <circle cx="21" cy="35" r="1"/>
-                    <g>
-                        <path d="M22,9.051v-3.051h2c.553,0,1-.448,1-1s-.447-1-1-1h-6c-.553,0-1,.448-1,1s.447,1,1,1h2v3.051c-7.805.518-14,7.016-14,14.949,0,8.271,6.729,15,15,15s15-6.729,15-15c0-7.933-6.195-14.431-14-14.949ZM21,37c-7.168,0-13-5.832-13-13s5.832-13,13-13,13,5.832,13,13-5.832,13-13,13Z"/>
-                        <path d="M6.713,15.475l6.529-6.53c.391-.39.391-1.023,0-1.414l-.653-.654c-1.062-1.061-2.472-1.646-3.973-1.646s-2.911.584-3.972,1.646c-1.062,1.061-1.646,2.472-1.646,3.972s.584,2.911,1.646,3.973l.653.653c.195.195.451.292.707.292s.512-.098.707-.293ZM5,10.85c0-.966.376-1.875,1.06-2.558.684-.683,1.592-1.06,2.558-1.06.941,0,1.827.357,2.504,1.006l-5.115,5.115c-.649-.677-1.006-1.562-1.006-2.503Z"/>
-                        <path d="M37.354,6.877c-1.061-1.061-2.472-1.646-3.972-1.646s-2.911.584-3.974,1.646l-.652.653c-.39.391-.39,1.023,0,1.414l6.529,6.53c.195.195.451.293.707.293s.512-.098.707-.292l.653-.653c1.062-1.061,1.646-2.472,1.646-3.972s-.584-2.911-1.646-3.972ZM35.994,13.353l-5.115-5.115c1.372-1.315,3.713-1.294,5.062.054.684.684,1.06,1.592,1.06,2.558,0,.941-.356,1.827-1.006,2.503Z"/>
-                        <path d="M22,23.5v-6.5c0-.552-.447-1-1-1s-1,.448-1,1v7c0,.315.148.611.4.8l4,3c.18.135.39.2.599.2.305,0,.604-.138.801-.4.332-.442.242-1.069-.2-1.4l-3.6-2.7Z"/>
-                        <circle cx="21" cy="13" r="1"/>
-                        <circle cx="10" cy="24" r="1"/>
-                        <circle cx="32" cy="24" r="1"/>
-                    </g>
+    <!-- Navigation -->
+    <nav>
+        <a href="#" class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/>
                 </svg>
             </div>
-            <h3>Unlimited Alarms</h3>
-            <p>Create as many alarms as you need for any specific calendar day</p>
-        </div>
-
-        <div class="feature">
-            <div class="feature-icon">
-                <svg viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M26.015,35.141c-.289.104-.583.198-.88.282-.531.151-.839.705-.688,1.236.126.439.526.726.961.726.091,0,.184-.013.275-.038.34-.098.675-.204,1.007-.323.52-.187.79-.759.604-1.279s-.757-.792-1.279-.604Z"/>
-                    <path d="M35.255,16.318c.097.294.184.59.262.891.118.449.523.746.967.746.084,0,.17-.011.255-.032.534-.141.854-.688.714-1.222-.09-.34-.188-.677-.299-1.01-.173-.524-.741-.814-1.263-.636-.524.173-.81.738-.636,1.263Z"/>
-                    <path d="M30.086,32.937c-.248.188-.5.369-.758.542-.459.307-.583.928-.275,1.387.192.289.51.444.832.444.191,0,.385-.055.555-.169.291-.194.576-.398.855-.61.44-.334.526-.962.192-1.401-.335-.44-.961-.525-1.401-.192Z"/>
-                    <path d="M36.58,24.797c-.53-.161-1.088.131-1.253.657-.092.297-.192.589-.303.877-.196.517.062,1.095.578,1.291.117.045.238.065.356.065.402,0,.782-.245.935-.644.124-.327.238-.658.344-.994.164-.527-.13-1.088-.657-1.253Z"/>
-                    <path d="M37.999,20.851c-.013-.545-.458-.978-1-.978h-.022c-.553.013-.99.471-.978,1.022v.104c0,.271-.006.541-.021.809-.03.552.392,1.023.943,1.053.019.002.037.002.056.002.527,0,.969-.412.997-.945.017-.305.025-.61.025-.918v-.149Z"/>
-                    <path d="M33.289,29.604c-.177.253-.362.501-.556.742-.345.431-.274,1.061.157,1.405.184.147.404.219.623.219.294,0,.585-.129.782-.376.219-.274.43-.556.632-.844.316-.452.207-1.075-.246-1.393-.45-.316-1.076-.207-1.393.246Z"/>
-                    <path d="M33.663,12.955c.19.299.514.462.844.462.185,0,.371-.051.537-.157.466-.298.602-.916.305-1.381-.095-.149-.192-.296-.292-.441-.311-.456-.932-.577-1.389-.264-.457.311-.575.933-.264,1.389.088.13.174.261.259.393Z"/>
-                    <path d="M33,10v-5c0-.553-.447-1-1-1s-1,.447-1,1v2.271c-2.893-2.112-6.367-3.271-10-3.271-9.374,0-17,7.626-17,17s7.626,17,17,17c.177,0,.354-.003.529-.008.552-.017.986-.478.971-1.029-.017-.553-.515-.971-1.029-.971-.156.005-.313.008-.471.008-8.271,0-15-6.729-15-15s6.729-15,15-15c3.272,0,6.4,1.061,8.984,3h-2.984c-.553,0-1,.447-1,1s.447,1,1,1h5c.553,0,1-.447,1-1Z"/>
-                    <path d="M27,20h-5v-10c0-.553-.447-1-1-1s-1,.447-1,1v11c0,.553.447,1,1,1h6c.553,0,1-.447,1-1s-.447-1-1-1Z"/>
-                </svg>
-            </div>
-            <h3>Repeatable Alarms</h3>
-            <p>Set recurring alarms for specific weekdays that repeat automatically</p>
-        </div>
-
-        <div class="feature">
-            <div class="feature-icon">
-                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                    <path d="m29.615,8.212c-.244-.189-.561-.259-.857-.182l-12,3c-.445.111-.757.511-.757.97v11.556c-.591-.344-1.268-.556-2-.556-2.206,0-4,1.794-4,4s1.794,4,4,4,4-1.794,4-4v-14.219l10-2.5v10.275c-.591-.344-1.268-.556-2-.556-2.206,0-4,1.794-4,4s1.794,4,4,4,4-1.794,4-4v-15c0-.308-.142-.599-.385-.788Zm-15.615,20.788c-1.103,0-2-.897-2-2s.897-2,2-2,2,.897,2,2-.897,2-2,2Zm12-3c-1.103,0-2-.897-2-2s.897-2,2-2,2,.897,2,2-.897,2-2,2Z"/>
-                    <path d="m10,7.767l3.485,2.091c.309.186.694.19,1.007.013.313-.178.507-.51.507-.87v-4c0-.352-.184-.677-.485-.857l-5-3c-.309-.186-.694-.19-1.007-.013s-.507.51-.507.87v14.556c-.591-.344-1.268-.556-2-.556-2.206,0-4,1.794-4,4s1.794,4,4,4,4-1.794,4-4V7.767Zm0-4l3,1.8v1.667l-3-1.8v-1.667Zm-4,18.233c-1.103,0-2-.897-2-2s.897-2,2-2,2,.897,2,2-.897,2-2,2Z"/>
-                </svg>
-            </div>
-            <h3>Custom Sounds</h3>
-            <p>Choose from a variety of alarm sounds or set your own special tones</p>
-        </div>
-
-        <div class="feature">
-            <div class="feature-icon">
-                <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M27.643,14.727c.878-.857,1.428-2.049,1.428-3.37,0-2.588-2.098-4.693-4.683-4.711.013-.132.04-.261.04-.396,0-2.343-1.906-4.25-4.25-4.25h-.929c-1.311,0-2.47.609-3.25,1.544-.78-.935-1.939-1.544-3.25-1.544h-.929c-2.344,0-4.25,1.907-4.25,4.25,0,.136.028.264.04.396-2.585.017-4.683,2.122-4.683,4.711,0,1.321.55,2.513,1.428,3.37-1.402.818-2.357,2.322-2.357,4.059v1.857c0,2.274,1.618,4.176,3.763,4.617-.019.163-.049.322-.049.49,0,2.343,1.906,4.25,4.25,4.25h2.786c1.311,0,2.47-.609,3.25-1.544.78.935,1.939,1.544,3.25,1.544h2.786c2.344,0,4.25-1.907,4.25-4.25,0-.168-.031-.327-.049-.49,2.145-.441,3.763-2.344,3.763-4.617v-1.857c0-1.737-.955-3.241-2.357-4.059ZM12.75,28h-2.786c-1.24,0-2.25-1.009-2.25-2.25s1.01-2.25,2.25-2.25h1.394c.553,0,1-.448,1-1s-.447-1-1-1h-1.394c-1.445,0-2.72.728-3.488,1.833-1.383-.123-2.476-1.275-2.476-2.69v-1.857c0-1.497,1.218-2.714,2.714-2.714h2.786c.553,0,1-.448,1-1s-.447-1-1-1h-1.857c-1.496,0-2.714-1.218-2.714-2.714s1.218-2.714,2.714-2.714h.671c.766,1.119,2.052,1.857,3.508,1.857h.465c.553,0,1-.448,1-1s-.447-1-1-1h-.465c-1.24,0-2.25-1.009-2.25-2.25s1.01-2.25,2.25-2.25h.929c1.24,0,2.25,1.009,2.25,2.25v19.5c0,1.241-1.01,2.25-2.25,2.25ZM28,20.643c0,1.415-1.093,2.567-2.476,2.69-.768-1.105-2.043-1.833-3.488-1.833h-1.394c-.553,0-1,.448-1,1s.447,1,1,1h1.394c1.24,0,2.25,1.009,2.25,2.25s-1.01,2.25-2.25,2.25h-2.786c-1.24,0-2.25-1.009-2.25-2.25V6.25c0-1.241,1.01-2.25,2.25-2.25h.929c1.24,0,2.25,1.009,2.25,2.25s-1.01,2.25-2.25,2.25h-.465c-.553,0-1,.448-1,1s.447,1,1,1h.465c1.456,0,2.742-.737,3.508-1.857h.671c1.496,0,2.714,1.217,2.714,2.714s-1.218,2.714-2.714,2.714h-1.857c-.553,0-1,.448-1,1s.447,1,1,1h2.786c1.496,0,2.714,1.218,2.714,2.714v1.857Z"/>
-                </svg>
-            </div>
-            <h3>Math Puzzles</h3>
-            <p>Solve math problems to dismiss alarms with 3 difficulty levels to wake you up</p>
-        </div>
-    </div>
-
-    <div class="app-store-badge">
-        <a href="https://apps.apple.com/us/app/loud-alarm-multialarm-pro/id6756498671" target="_blank" rel="noopener noreferrer">
-            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+            MultiAlarm Pro
         </a>
-    </div>
+        <a href="https://apps.apple.com/us/app/loud-alarm-multialarm-pro/id6756498671" class="nav-cta" target="_blank" rel="noopener noreferrer">Download</a>
+    </nav>
 
-    <div class="footer-links">
-        <a href="alarmpro_privacy_policy.html">Privacy Policy</a>
-        <span class="divider">|</span>
-        <a href="alarmpro_terms_of_use.html">Terms of Use</a>
-    </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge">
+            <svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+            Featured on the App Store
+        </div>
+        <h1>
+            <span>WAKE UP</span>
+            <span class="highlight">ON TIME</span>
+        </h1>
+        <p class="hero-subtitle">
+            The alarm app that makes sure you actually get out of bed. Math puzzles, unlimited alarms, and smart features for heavy sleepers.
+        </p>
+        <div class="hero-cta">
+            <a href="https://apps.apple.com/us/app/loud-alarm-multialarm-pro/id6756498671" class="app-store-btn" target="_blank" rel="noopener noreferrer">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+            </a>
+            <span class="hero-note">Free download. Premium features available.</span>
+        </div>
+    </section>
+
+    <!-- Phone Showcase -->
+    <section class="phone-showcase">
+        <div class="phone-container">
+            <div class="phone-mockup left">
+                <div class="phone-screen">
+                    <img src="screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-01-17 at 21.41.50.png" alt="MultiAlarm Pro Time Picker">
+                </div>
+            </div>
+            <div class="phone-mockup center">
+                <div class="phone-screen">
+                    <img src="screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-01-18 at 20.08.26.png" alt="MultiAlarm Pro Main Screen">
+                </div>
+            </div>
+            <div class="phone-mockup right">
+                <div class="phone-screen">
+                    <img src="screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-01-17 at 21.39.58.png" alt="MultiAlarm Pro Create Alarm">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-header animate-on-scroll">
+            <p class="section-label">Features</p>
+            <h2 class="section-title">Everything you need to wake up</h2>
+            <p class="section-subtitle">Powerful features designed specifically for heavy sleepers who need that extra push to start their day.</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M27.643,14.727c.878-.857,1.428-2.049,1.428-3.37,0-2.588-2.098-4.693-4.683-4.711.013-.132.04-.261.04-.396,0-2.343-1.906-4.25-4.25-4.25h-.929c-1.311,0-2.47.609-3.25,1.544-.78-.935-1.939-1.544-3.25-1.544h-.929c-2.344,0-4.25,1.907-4.25,4.25,0,.136.028.264.04.396-2.585.017-4.683,2.122-4.683,4.711,0,1.321.55,2.513,1.428,3.37-1.402.818-2.357,2.322-2.357,4.059v1.857c0,2.274,1.618,4.176,3.763,4.617-.019.163-.049.322-.049.49,0,2.343,1.906,4.25,4.25,4.25h2.786c1.311,0,2.47-.609,3.25-1.544.78.935,1.939,1.544,3.25,1.544h2.786c2.344,0,4.25-1.907,4.25-4.25,0-.168-.031-.327-.049-.49,2.145-.441,3.763-2.344,3.763-4.617v-1.857c0-1.737-.955-3.241-2.357-4.059Z"/>
+                    </svg>
+                </div>
+                <h3>Math Puzzles</h3>
+                <p>Solve math problems before dismissing your alarm. Three difficulty levels ensure you're fully awake and thinking before starting your day.</p>
+            </div>
+
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/>
+                    </svg>
+                </div>
+                <h3>Unlimited Alarms</h3>
+                <p>Create as many alarms as you need for any schedule. Perfect for complex routines with different wake times throughout the week.</p>
+            </div>
+
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"/>
+                    </svg>
+                </div>
+                <h3>Quick Alarm</h3>
+                <p>Set instant timers for 1, 5, 15, 30, 45, or 60 minutes with one tap. Perfect for power naps, cooking, or study sessions.</p>
+            </div>
+
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+                    </svg>
+                </div>
+                <h3>Premium Sounds</h3>
+                <p>Choose from a curated collection of alarm sounds. Find the perfect tone that wakes you gently or something impossible to ignore.</p>
+            </div>
+
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
+                    </svg>
+                </div>
+                <h3>Flexible Scheduling</h3>
+                <p>Set alarms to repeat on specific weekdays or exact dates each month. Your schedule is unique, and your alarm adapts to it.</p>
+            </div>
+
+            <div class="feature-card animate-on-scroll">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+                    </svg>
+                </div>
+                <h3>Live Activities</h3>
+                <p>Track snooze countdowns and quick alarms right on your Lock Screen and Dynamic Island. Always know when your next alarm rings.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="section-header animate-on-scroll">
+            <p class="section-label">How It Works</p>
+            <h2 class="section-title">Simple, effective, wake-up</h2>
+            <p class="section-subtitle">Three steps to never oversleep again.</p>
+        </div>
+
+        <div class="steps-container">
+            <div class="step animate-on-scroll">
+                <div class="step-content">
+                    <div class="step-number">01</div>
+                    <h3>Set Your Alarm</h3>
+                    <p>Create unlimited alarms with our intuitive time picker. Choose your preferred days, sounds, and puzzle difficulty. Name your alarms for easy organization.</p>
+                </div>
+                <div class="step-visual">
+                    <div class="step-phone">
+                        <div class="step-phone-screen">
+                            <img src="screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-01-17 at 21.41.50.png" alt="Set alarm time">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step animate-on-scroll">
+                <div class="step-content">
+                    <div class="step-number">02</div>
+                    <h3>Wake Up to Puzzles</h3>
+                    <p>When your alarm goes off, you'll need to solve math puzzles to dismiss it. This engages your brain and helps you transition from sleep to wakefulness.</p>
+                </div>
+                <div class="step-visual">
+                    <div class="step-phone">
+                        <div class="step-phone-screen">
+                            <img src="screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-01-17 at 21.43.22.png" alt="Solve math puzzle">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step animate-on-scroll">
+                <div class="step-content">
+                    <div class="step-number">03</div>
+                    <h3>Start Your Day</h3>
+                    <p>With your brain activated, you're ready to start your day fully awake. No more accidentally turning off alarms while half asleep!</p>
+                </div>
+                <div class="step-visual">
+                    <div class="step-phone">
+                        <div class="step-phone-screen">
+                            <img src="screenshots/Simulator Screenshot - iPhone 17 Pro Max - 2026-01-18 at 20.08.26.png" alt="Your alarms organized">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Clock Section -->
+    <section class="clock-section">
+        <div class="section-header animate-on-scroll">
+            <p class="section-label">Current Time</p>
+            <h2 class="section-title">Your wake-up call awaits</h2>
+        </div>
+
+        <div class="clock-wrapper">
+            <div class="flip-clock">
+                <div class="flip-unit-container" id="hours">
+                    <div class="flip-unit" id="hour-tens">
+                        <div class="flip-card top">
+                            <div class="flip-card-inner">0</div>
+                        </div>
+                        <div class="flip-card bottom">
+                            <div class="flip-card-inner">0</div>
+                        </div>
+                    </div>
+                    <div class="flip-unit" id="hour-ones">
+                        <div class="flip-card top">
+                            <div class="flip-card-inner">0</div>
+                        </div>
+                        <div class="flip-card bottom">
+                            <div class="flip-card-inner">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <span class="separator">:</span>
+
+                <div class="flip-unit-container" id="minutes">
+                    <div class="flip-unit" id="minute-tens">
+                        <div class="flip-card top">
+                            <div class="flip-card-inner">0</div>
+                        </div>
+                        <div class="flip-card bottom">
+                            <div class="flip-card-inner">0</div>
+                        </div>
+                    </div>
+                    <div class="flip-unit" id="minute-ones">
+                        <div class="flip-card top">
+                            <div class="flip-card-inner">0</div>
+                        </div>
+                        <div class="flip-card bottom">
+                            <div class="flip-card-inner">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <span class="separator">:</span>
+
+                <div class="flip-unit-container" id="seconds">
+                    <div class="flip-unit" id="second-tens">
+                        <div class="flip-card top">
+                            <div class="flip-card-inner">0</div>
+                        </div>
+                        <div class="flip-card bottom">
+                            <div class="flip-card-inner">0</div>
+                        </div>
+                    </div>
+                    <div class="flip-unit" id="second-ones">
+                        <div class="flip-card top">
+                            <div class="flip-card-inner">0</div>
+                        </div>
+                        <div class="flip-card bottom">
+                            <div class="flip-card-inner">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <span class="period" id="period"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Perfect For Section -->
+    <section class="perfect-for">
+        <div class="section-header animate-on-scroll">
+            <p class="section-label">Perfect For</p>
+            <h2 class="section-title">Made for people like you</h2>
+        </div>
+
+        <div class="perfect-grid">
+            <div class="perfect-card animate-on-scroll">
+                <div class="perfect-card-icon">&#128564;</div>
+                <h3>Heavy Sleepers</h3>
+                <p>Who sleep through regular alarms</p>
+            </div>
+            <div class="perfect-card animate-on-scroll">
+                <div class="perfect-card-icon">&#127891;</div>
+                <h3>Students</h3>
+                <p>Who can't afford to miss morning classes</p>
+            </div>
+            <div class="perfect-card animate-on-scroll">
+                <div class="perfect-card-icon">&#128188;</div>
+                <h3>Professionals</h3>
+                <p>With early meetings and tight schedules</p>
+            </div>
+            <div class="perfect-card animate-on-scroll">
+                <div class="perfect-card-icon">&#128260;</div>
+                <h3>Shift Workers</h3>
+                <p>With irregular or rotating schedules</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content animate-on-scroll">
+            <h2>Ready to wake up on time?</h2>
+            <p>Download MultiAlarm Pro today and never oversleep again. Your mornings are about to change.</p>
+            <a href="https://apps.apple.com/us/app/loud-alarm-multialarm-pro/id6756498671" class="app-store-btn" target="_blank" rel="noopener noreferrer">
+                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">MultiAlarm Pro</div>
+            <div class="footer-links">
+                <a href="alarmpro_privacy_policy.html">Privacy Policy</a>
+                <a href="alarmpro_terms_of_use.html">Terms of Use</a>
+                <a href="mailto:support@multialarmpro.com">Contact</a>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2026 MultiAlarm Pro. All rights reserved.
+            </div>
+        </div>
+    </footer>
 
     <script>
+        // Flip Clock
         class FlipClock {
             constructor() {
                 this.hourTens = document.getElementById('hour-tens');
@@ -564,19 +1171,14 @@
                     secondOnes: -1
                 };
 
-                // Detect if locale uses 12-hour format
                 this.use12Hour = this.detectTimeFormat();
-
                 this.update();
                 setInterval(() => this.update(), 1000);
             }
 
             detectTimeFormat() {
-                // Use toLocaleTimeString which respects system settings
                 const testDate = new Date(2000, 0, 1, 13, 0, 0);
                 const formatted = testDate.toLocaleTimeString();
-
-                // 24-hour format will contain "13", 12-hour format will show "1" with AM/PM
                 return !formatted.includes('13');
             }
 
@@ -610,14 +1212,12 @@
                 const topCard = element.querySelector('.flip-card.top .flip-card-inner');
                 const bottomCard = element.querySelector('.flip-card.bottom .flip-card-inner');
 
-                // Remove any existing flip animations
                 const oldFlipTop = element.querySelector('.flip-top');
                 const oldFlipBottom = element.querySelector('.flip-bottom');
                 if (oldFlipTop) oldFlipTop.remove();
                 if (oldFlipBottom) oldFlipBottom.remove();
 
                 if (this.prevTime[key] !== -1) {
-                    // Create flip animation cards
                     const flipTop = document.createElement('div');
                     flipTop.className = 'flip-card flip-top';
                     flipTop.innerHTML = `<div class="flip-card-inner">${this.prevTime[key]}</div>`;
@@ -629,17 +1229,14 @@
                     element.appendChild(flipTop);
                     element.appendChild(flipBottom);
 
-                    // Update top card immediately (it's hidden behind the flipping card)
                     topCard.textContent = value;
 
-                    // Update bottom card after the flip animation completes
                     setTimeout(() => {
                         bottomCard.textContent = value;
                         flipTop.remove();
                         flipBottom.remove();
                     }, 600);
                 } else {
-                    // Initial load - update both cards immediately
                     topCard.textContent = value;
                     bottomCard.textContent = value;
                 }
@@ -648,7 +1245,25 @@
             }
         }
 
-        // Initialize the clock
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Initialize
         new FlipClock();
     </script>
 </body>
