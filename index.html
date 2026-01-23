@@ -2,12 +2,59 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>MultiAlarm Pro - Never Oversleep Again</title>
-    <meta name="description" content="The ultimate alarm app for heavy sleepers. Math puzzles, unlimited alarms, and smart features to ensure you wake up on time.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MultiAlarm Pro - Alarm Clock App for Heavy Sleepers | Math Puzzles to Wake Up</title>
+    <meta name="description" content="The alarm app that forces you to wake up. Solve math puzzles to dismiss alarms - you can't ignore it, you can't snooze through it. Perfect for heavy sleepers. Free download.">
+    <meta name="keywords" content="alarm app, alarm clock app, heavy sleepers, math alarm, wake up app, loud alarm, morning alarm, sleep through alarm">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://multialarmpro.com/">
+    <meta property="og:title" content="MultiAlarm Pro - Finally Wake Up On Time">
+    <meta property="og:description" content="The alarm app that forces you to wake up. Solve math puzzles to dismiss - you can't ignore it.">
+    <meta property="og:image" content="https://multialarmpro.com/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MultiAlarm Pro - Finally Wake Up On Time">
+    <meta name="twitter:description" content="The alarm app that forces you to wake up. Solve math puzzles to dismiss - you can't ignore it.">
+    <meta name="twitter:image" content="https://multialarmpro.com/og-image.png">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://multialarmpro.com/">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "MultiAlarm Pro",
+        "operatingSystem": "iOS",
+        "applicationCategory": "UtilitiesApplication",
+        "description": "Alarm clock app with math puzzles for heavy sleepers. Solve puzzles to dismiss alarms and actually wake up.",
+        "url": "https://multialarmpro.com",
+        "downloadUrl": "https://apps.apple.com/us/app/loud-alarm-multialarm-pro/id6756498671",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "100"
+        }
+    }
+    </script>
+
     <style>
         * {
             margin: 0;
@@ -27,50 +74,53 @@
             --bg: #FAFAFA;
         }
 
-        html, body {
-            height: 100%;
-            overflow: hidden;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg);
             color: var(--dark);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            max-height: 100vh;
+            line-height: 1.6;
         }
 
-        /* Main Container */
-        .container {
-            flex: 1;
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 20px;
-            gap: 24px;
-            max-height: 100vh;
-        }
-
-        /* Logo & Title */
-        .brand {
+            padding: 40px 20px;
             text-align: center;
         }
 
-        .brand h1 {
-            font-size: clamp(1.5rem, 4vw, 2rem);
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 800;
             letter-spacing: -0.02em;
             color: var(--dark);
-            margin-bottom: 4px;
+            margin-bottom: 16px;
+            line-height: 1.2;
         }
 
-        .brand p {
-            font-size: clamp(0.875rem, 2vw, 1rem);
+        .hero h1 span {
+            color: var(--primary-dark);
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
             color: var(--gray-600);
             font-weight: 500;
+            margin-bottom: 32px;
+            max-width: 540px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Flip Clock */
@@ -78,6 +128,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-bottom: 32px;
         }
 
         .flip-clock {
@@ -203,56 +254,12 @@
             100% { transform: rotateX(0deg); }
         }
 
-        /* Features */
-        .features {
-            display: flex;
-            justify-content: center;
-            gap: clamp(16px, 4vw, 32px);
-            flex-wrap: wrap;
-            max-width: 700px;
-        }
-
-        .feature {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--white);
-            padding: 12px 18px;
-            border-radius: 100px;
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-            border: 1px solid var(--gray-200);
-        }
-
-        .feature-icon {
-            width: 28px;
-            height: 28px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .feature-icon svg {
-            width: 14px;
-            height: 14px;
-            fill: var(--dark);
-        }
-
-        .feature span {
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--dark);
-            white-space: nowrap;
-        }
-
-        /* CTA */
-        .cta {
+        /* CTA Button */
+        .cta-group {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
         }
 
         .app-store-btn {
@@ -264,12 +271,253 @@
         }
 
         .app-store-btn img {
+            height: 52px;
+        }
+
+        .cta-note {
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        /* Social Proof */
+        .social-proof {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        .proof-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.875rem;
+            color: var(--gray-600);
+        }
+
+        .stars {
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 80px 20px;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 48px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .section-header p {
+            font-size: 1rem;
+            color: var(--gray-600);
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: var(--white);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .step {
+            text-align: center;
+            padding: 24px;
+        }
+
+        .step-number {
+            width: 48px;
             height: 48px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin: 0 auto 16px;
+        }
+
+        .step h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+        }
+
+        /* Features Section */
+        .features-section {
+            background: var(--bg);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 28px;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            border: 1px solid var(--gray-200);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--dark);
+        }
+
+        .feature-card h3 {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .feature-card p {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* Perfect For Section */
+        .perfect-for {
+            background: var(--dark);
+            color: var(--white);
+        }
+
+        .perfect-for .section-header h2 {
+            color: var(--white);
+        }
+
+        .perfect-for .section-header p {
+            color: var(--gray-400);
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .audience-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .audience-item svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .audience-item span {
+            font-size: 0.9375rem;
+            color: var(--gray-100);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            background: var(--white);
+        }
+
+        .faq-list {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--gray-200);
+            padding: 24px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .faq-answer {
+            font-size: 0.9375rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+        }
+
+        /* Final CTA */
+        .final-cta {
+            background: var(--bg);
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 12px;
+        }
+
+        .final-cta p {
+            font-size: 1rem;
+            color: var(--gray-600);
+            margin-bottom: 24px;
         }
 
         /* Footer */
         footer {
-            padding: 16px 20px;
+            padding: 24px 20px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -281,7 +529,7 @@
         footer a {
             color: var(--gray-600);
             text-decoration: none;
-            font-size: 0.8125rem;
+            font-size: 0.875rem;
             font-weight: 500;
             transition: color 0.2s ease;
         }
@@ -296,50 +544,16 @@
 
         /* Responsive */
         @media (max-width: 600px) {
-            .container {
-                gap: 20px;
-                padding: 16px;
+            .hero {
+                padding: 32px 16px;
             }
 
-            .features {
-                gap: 10px;
-            }
-
-            .feature {
-                padding: 10px 14px;
-            }
-
-            .feature-icon {
-                width: 24px;
-                height: 24px;
-            }
-
-            .feature-icon svg {
-                width: 12px;
-                height: 12px;
-            }
-
-            .feature span {
-                font-size: 0.8125rem;
-            }
-
-            footer {
-                padding: 12px 16px;
-                gap: 16px;
-            }
-
-            footer a {
-                font-size: 0.75rem;
-            }
-        }
-
-        @media (max-height: 600px) {
-            .container {
-                gap: 16px;
+            section {
+                padding: 60px 16px;
             }
 
             .flip-unit {
-                width: 45px;
+                width: 44px;
                 height: 62px;
             }
 
@@ -348,134 +562,293 @@
             }
 
             .flip-clock .separator {
-                font-size: 32px;
+                font-size: 28px;
             }
 
-            .period {
-                font-size: 16px;
+            .social-proof {
+                flex-direction: column;
+                gap: 12px;
             }
 
-            .feature {
-                padding: 8px 12px;
+            .steps {
+                gap: 24px;
             }
 
-            .app-store-btn img {
-                height: 40px;
+            .features-grid {
+                gap: 16px;
+            }
+
+            .feature-card {
+                padding: 20px;
+            }
+
+            footer {
+                padding: 16px;
+                gap: 16px;
+            }
+
+            footer a {
+                font-size: 0.8125rem;
+            }
+        }
+
+        @media (max-height: 700px) and (min-width: 601px) {
+            .hero {
+                padding: 24px 20px;
+            }
+
+            .flip-unit {
+                width: 50px;
+                height: 70px;
+            }
+
+            .flip-card-inner {
+                font-size: 36px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Brand -->
-        <div class="brand">
-            <h1>MultiAlarm Pro</h1>
-            <p>Never oversleep again</p>
-        </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The Alarm App That <span>Forces You to Wake Up</span></h1>
+            <p class="hero-subtitle">Solve math puzzles to dismiss your alarm. You can't ignore it, you can't snooze through it. Finally, an alarm that actually works for heavy sleepers.</p>
 
-        <!-- Flip Clock -->
-        <div class="clock-wrapper">
-            <div class="flip-clock">
-                <div class="flip-unit-container" id="hours">
-                    <div class="flip-unit" id="hour-tens">
-                        <div class="flip-card top">
-                            <div class="flip-card-inner">0</div>
+            <!-- Flip Clock -->
+            <div class="clock-wrapper">
+                <div class="flip-clock">
+                    <div class="flip-unit-container" id="hours">
+                        <div class="flip-unit" id="hour-tens">
+                            <div class="flip-card top">
+                                <div class="flip-card-inner">0</div>
+                            </div>
+                            <div class="flip-card bottom">
+                                <div class="flip-card-inner">0</div>
+                            </div>
                         </div>
-                        <div class="flip-card bottom">
-                            <div class="flip-card-inner">0</div>
+                        <div class="flip-unit" id="hour-ones">
+                            <div class="flip-card top">
+                                <div class="flip-card-inner">0</div>
+                            </div>
+                            <div class="flip-card bottom">
+                                <div class="flip-card-inner">0</div>
+                            </div>
                         </div>
                     </div>
-                    <div class="flip-unit" id="hour-ones">
-                        <div class="flip-card top">
-                            <div class="flip-card-inner">0</div>
+
+                    <span class="separator">:</span>
+
+                    <div class="flip-unit-container" id="minutes">
+                        <div class="flip-unit" id="minute-tens">
+                            <div class="flip-card top">
+                                <div class="flip-card-inner">0</div>
+                            </div>
+                            <div class="flip-card bottom">
+                                <div class="flip-card-inner">0</div>
+                            </div>
                         </div>
-                        <div class="flip-card bottom">
-                            <div class="flip-card-inner">0</div>
+                        <div class="flip-unit" id="minute-ones">
+                            <div class="flip-card top">
+                                <div class="flip-card-inner">0</div>
+                            </div>
+                            <div class="flip-card bottom">
+                                <div class="flip-card-inner">0</div>
+                            </div>
                         </div>
                     </div>
+
+                    <span class="separator">:</span>
+
+                    <div class="flip-unit-container" id="seconds">
+                        <div class="flip-unit" id="second-tens">
+                            <div class="flip-card top">
+                                <div class="flip-card-inner">0</div>
+                            </div>
+                            <div class="flip-card bottom">
+                                <div class="flip-card-inner">0</div>
+                            </div>
+                        </div>
+                        <div class="flip-unit" id="second-ones">
+                            <div class="flip-card top">
+                                <div class="flip-card-inner">0</div>
+                            </div>
+                            <div class="flip-card bottom">
+                                <div class="flip-card-inner">0</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <span class="period" id="period"></span>
                 </div>
+            </div>
 
-                <span class="separator">:</span>
+            <!-- CTA -->
+            <div class="cta-group">
+                <a href="https://apps.apple.com/us/app/loud-alarm-multialarm-pro/id6756498671" class="app-store-btn" target="_blank" rel="noopener noreferrer">
+                    <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download MultiAlarm Pro on the App Store">
+                </a>
+                <p class="cta-note">Free download. No account required.</p>
+            </div>
 
-                <div class="flip-unit-container" id="minutes">
-                    <div class="flip-unit" id="minute-tens">
-                        <div class="flip-card top">
-                            <div class="flip-card-inner">0</div>
-                        </div>
-                        <div class="flip-card bottom">
-                            <div class="flip-card-inner">0</div>
-                        </div>
-                    </div>
-                    <div class="flip-unit" id="minute-ones">
-                        <div class="flip-card top">
-                            <div class="flip-card-inner">0</div>
-                        </div>
-                        <div class="flip-card bottom">
-                            <div class="flip-card-inner">0</div>
-                        </div>
-                    </div>
+            <!-- Social Proof -->
+            <div class="social-proof">
+                <div class="proof-item">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+                    <span>Trusted by heavy sleepers</span>
                 </div>
-
-                <span class="separator">:</span>
-
-                <div class="flip-unit-container" id="seconds">
-                    <div class="flip-unit" id="second-tens">
-                        <div class="flip-card top">
-                            <div class="flip-card-inner">0</div>
-                        </div>
-                        <div class="flip-card bottom">
-                            <div class="flip-card-inner">0</div>
-                        </div>
-                    </div>
-                    <div class="flip-unit" id="second-ones">
-                        <div class="flip-card top">
-                            <div class="flip-card-inner">0</div>
-                        </div>
-                        <div class="flip-card bottom">
-                            <div class="flip-card-inner">0</div>
-                        </div>
-                    </div>
-                </div>
-
-                <span class="period" id="period"></span>
             </div>
         </div>
+    </section>
 
-        <!-- Features -->
-        <div class="features">
-            <div class="feature">
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="section-header">
+            <h2>How It Works</h2>
+            <p>A simple but effective method to actually wake you up</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Set Your Alarm</h3>
+                <p>Create unlimited alarms with your preferred sounds. Set repeat schedules for any day of the week or specific dates.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Alarm Goes Off</h3>
+                <p>When it's time to wake up, your chosen alarm sound plays. You can't simply tap to dismiss it.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Solve to Dismiss</h3>
+                <p>To turn off the alarm, you must solve math puzzles. This activates your brain and ensures you're actually awake.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="section-header">
+            <h2>Everything You Need to Wake Up</h2>
+            <p>Designed specifically for people who struggle with mornings</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14h-2v-4H8v-2h4V7h2v4h4v2h-4v4z"/></svg>
                 </div>
-                <span>Math Puzzles</span>
+                <h3>Math Puzzles</h3>
+                <p>Choose your difficulty level. Need an extra challenge? Set multiple puzzles per alarm to guarantee you're fully awake.</p>
             </div>
-            <div class="feature">
+            <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
                 </div>
-                <span>Unlimited Alarms</span>
+                <h3>Unlimited Alarms</h3>
+                <p>Create as many alarms as you need. Complex schedule with different wake times? Multiple backup alarms? We've got you covered.</p>
             </div>
-            <div class="feature">
+            <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
                 </div>
-                <span>Premium Sounds</span>
+                <h3>Premium Sounds</h3>
+                <p>Curated collection of alarm sounds. Find one that wakes you gently, or pick something loud that's impossible to ignore.</p>
             </div>
-            <div class="feature">
+            <div class="feature-card">
                 <div class="feature-icon">
                     <svg viewBox="0 0 24 24"><path d="M13 3a9 9 0 0 0-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42A8.954 8.954 0 0 0 13 21a9 9 0 0 0 0-18z"/></svg>
                 </div>
-                <span>Quick Alarm</span>
+                <h3>Quick Alarm</h3>
+                <p>Need a quick timer? Set instant 1-60 minute alarms with one tap. Perfect for power naps, cooking, or study breaks.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14z"/></svg>
+                </div>
+                <h3>Live Activities</h3>
+                <p>Track snooze countdowns and quick alarms right on your Lock Screen and Dynamic Island. Always know when your next alarm rings.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM7 11h5v5H7z"/></svg>
+                </div>
+                <h3>Flexible Scheduling</h3>
+                <p>The most flexible repeat options available. Set alarms for specific weekdays or exact dates each month. Your schedule, your rules.</p>
             </div>
         </div>
+    </section>
 
-        <!-- CTA -->
-        <div class="cta">
-            <a href="https://apps.apple.com/us/app/loud-alarm-multialarm-pro/id6756498671" class="app-store-btn" target="_blank" rel="noopener noreferrer">
-                <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download on the App Store">
-            </a>
+    <!-- Perfect For Section -->
+    <section class="perfect-for">
+        <div class="section-header">
+            <h2>Built for People Who Actually Need It</h2>
+            <p>If regular alarms worked for you, you wouldn't be here</p>
         </div>
-    </div>
+        <div class="audience-grid">
+            <div class="audience-item">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span>Heavy sleepers</span>
+            </div>
+            <div class="audience-item">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span>Serial snooze-button hitters</span>
+            </div>
+            <div class="audience-item">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span>Students with early classes</span>
+            </div>
+            <div class="audience-item">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span>Professionals with early meetings</span>
+            </div>
+            <div class="audience-item">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span>Rotating schedule workers</span>
+            </div>
+            <div class="audience-item">
+                <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                <span>Anyone who's missed an important alarm</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="section-header">
+            <h2>Common Questions</h2>
+        </div>
+        <div class="faq-list">
+            <div class="faq-item">
+                <h3 class="faq-question">Is MultiAlarm Pro free?</h3>
+                <p class="faq-answer">Yes, MultiAlarm Pro is free to download and use.</p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">Can I really not dismiss the alarm without solving puzzles?</h3>
+                <p class="faq-answer">That's the point. When a puzzle alarm goes off, you must solve the math problems to dismiss it. There's no force-quit workaround. This is what makes it effective for heavy sleepers who turn off alarms in their sleep.</p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">How hard are the math puzzles?</h3>
+                <p class="faq-answer">You choose the difficulty. Easy mode has simple addition/subtraction. Harder modes require more thought. You can also set multiple puzzles per alarm if you need extra assurance.</p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">Will the alarm work if my phone is on silent?</h3>
+                <p class="faq-answer">Yes. Like the native iOS alarm, MultiAlarm Pro plays through the ringer regardless of your silent switch or Do Not Disturb settings.</p>
+            </div>
+            <div class="faq-item">
+                <h3 class="faq-question">Is it available on Android?</h3>
+                <p class="faq-answer">Currently, MultiAlarm Pro is iOS only. We're focused on making the best possible iPhone alarm app first.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2>Ready to Actually Wake Up?</h2>
+        <p>Download free and see why heavy sleepers love MultiAlarm Pro.</p>
+        <a href="https://apps.apple.com/us/app/loud-alarm-multialarm-pro/id6756498671" class="app-store-btn" target="_blank" rel="noopener noreferrer">
+            <img src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" alt="Download MultiAlarm Pro on the App Store">
+        </a>
+    </section>
 
     <!-- Footer -->
     <footer>
